@@ -1,0 +1,29 @@
+{
+  "name": "npm-postinstall-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {},
+  "keywords": [
+    "pnpm",
+    "cnpm",
+    "npm",
+    "yarn",
+    "only-allow",
+    "preinstall",
+    "postinstall"
+  ],
+  "author": "1372978934@qq.com",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.1.0",
+    "minimist": "^1.2.7",
+    "picocolors": "^1.0.0",
+    "string-similarity": "^4.0.4",
+    "which-pm-runs": "^1.1.0"
+  }
+}
