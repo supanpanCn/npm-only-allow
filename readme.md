@@ -1,12 +1,12 @@
-# npm-fasly-postinstall
+# npm-only-allow
 > The hook about preinstall of npm behaves inconsistently across package managers. 
 
 > The existing solution (only-allow) is not working well.  
 
-> The npm-fasly-postinstall goal is to fix them. 
+> The npm-only-allow goal is to fix them. 
 # Installation
 ```js
-  yarn add npm-fasly-postinstall
+  yarn add npm-only-allow
 ```
 # usage
 
@@ -18,8 +18,8 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 ```json
 {
   "scripts": {
-    "postinstall": "npm-fasly-postinstall --PM yarn --server install",
-    "start": "npm-fasly-postinstall --server start && vite server or other"
+    "postinstall": "npm-only-allow --PM yarn --server install",
+    "start": "npm-only-allow --server start && vite server or other"
   }
 }
 ```
@@ -49,8 +49,8 @@ Let's take `cnpm` for example
 ```json
 {
   "scripts": {
-    "postinstall": "npm-fasly-postinstall --PM cnpm --server install",
-    "start": "npm-fasly-postinstall --server start"
+    "postinstall": "npm-only-allow --PM cnpm --server install",
+    "start": "npm-only-allow --server start"
   }
 }
 ```
