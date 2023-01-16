@@ -1,6 +1,6 @@
 {
-  "name": "npm-preinstall",
-  "version": "1.0.0",
+  "name": "npm-fasly-postinstall",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "bin": "index.js",
@@ -19,11 +19,7 @@
   ],
   "author": "1372978934@qq.com",
   "license": "MIT",
-  "homepage": "https://github.com/supanpanCn/npm-postinstall/blob/main/readme.md",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/supanpanCn/npm-postinstall.git"
-  },
+  "homepage": "https://github.com/supanpanCn/npm-fasly-postinstall",
   "dependencies": {
     "fs-extra": "^11.1.0",
     "minimist": "^1.2.7",
