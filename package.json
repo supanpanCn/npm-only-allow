@@ -1,5 +1,5 @@
 {
-  "name": "npm-postinstall-1",
+  "name": "npm-postinstall",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,11 +19,15 @@
   ],
   "author": "1372978934@qq.com",
   "license": "MIT",
+  "homepage": "https://github.com/supanpanCn/npm-postinstall/blob/main/readme.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supanpanCn/npm-postinstall.git"
+  },
   "dependencies": {
     "fs-extra": "^11.1.0",
     "minimist": "^1.2.7",
     "picocolors": "^1.0.0",
-    "string-similarity": "^4.0.4",
     "which-pm-runs": "^1.1.0"
   }
 }
