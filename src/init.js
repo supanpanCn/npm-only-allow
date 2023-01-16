@@ -1,8 +1,5 @@
 const minimist = require("minimist");
 const {
-  compareTwoStrings
-} = require('string-similarity')
-const {
   removeSync,
   copySync,
   writeJsonSync,
@@ -96,14 +93,7 @@ function createContext() {
     exists:existsSync,
     unlink:unlinkSync,
     readFile:readFileSync,
-    copyPkg:copyPkg(ctx),
-    diff:function(a,b){
-      if(getType(a) === 'O' && getType(b) === 'O'){
-        a = JSON.stringify(a)
-        b = JSON.stringify(b)
-      }
-      return compareTwoStrings(a,b) === 1
-    }
+    copyPkg:copyPkg(ctx)
   };
   ctx.npm = {
     uninstall
