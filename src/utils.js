@@ -23,7 +23,7 @@ function warn(ctx) {
         log = msg
         color = rest[0] ? rest[0] : color
       }
-      console.log(colors[color](`[npm-postinstall]:${log}`))
+      console.log(colors[color](`[npm-preinstall]:${log}`))
     }
   }
 }

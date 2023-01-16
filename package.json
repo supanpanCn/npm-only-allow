@@ -1,5 +1,5 @@
 {
-  "name": "npm-postinstall",
+  "name": "npm-preinstall",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
