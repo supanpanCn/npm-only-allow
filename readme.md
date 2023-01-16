@@ -1,12 +1,12 @@
-# npm-postinstall
+# npm-fasly-postinstall
 > The hook about preinstall of npm behaves inconsistently across package managers. 
 
 > The existing solution (only-allow) is not working well.  
 
-> The npm-postinstall goal is to fix them. 
+> The npm-fasly-postinstall goal is to fix them. 
 # Installation
 ```js
-  yarn add npm-postinstall
+  yarn add npm-fasly-postinstall
 ```
 # usage
 
@@ -18,8 +18,8 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 ```json
 {
   "scripts": {
-    "postinstall": "npm-postinstall --PM yarn --server install",
-    "start": "npm-postinstall --server start && vite server or other"
+    "postinstall": "npm-fasly-postinstall --PM yarn --server install",
+    "start": "npm-fasly-postinstall --server start && vite server or other"
   }
 }
 ```
@@ -49,8 +49,8 @@ Let's take `cnpm` for example
 ```json
 {
   "scripts": {
-    "postinstall": "npm-postinstall --PM cnpm --server install",
-    "start": "npm-postinstall --server start"
+    "postinstall": "npm-fasly-postinstall --PM cnpm --server install",
+    "start": "npm-fasly-postinstall --server start"
   }
 }
 ```

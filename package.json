@@ -1,11 +1,12 @@
 {
   "name": "npm-fasly-postinstall",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.5",
+  "description": "Specification package manager",
   "main": "index.js",
   "bin": "index.js",
   "files": [
-    "index.js"
+    "index.js",
+    "src"
   ],
   "scripts": {},
   "keywords": [
