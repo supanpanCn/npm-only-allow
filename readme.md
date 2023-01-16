@@ -26,6 +26,14 @@ If you want to smooth out the difference, you also need to add it in the startup
 }
 ```
 
+# params
+* PM
+  > Set the package manager
+* server
+  > Specifies whether to run in the 'postinstall' or 'start' phase
+* lang
+  > Set the language category for error messages to be output , Default to Chinese
+
 # Sample environment
 `node v14.19.0`  
 `npm v8.11.0`  

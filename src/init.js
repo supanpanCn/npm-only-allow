@@ -53,6 +53,7 @@ function createContext() {
     PM: "",
     server: "",
     npm: {},
+    lang:'zh',
     _npm_postintall_throw_err: false,
   };
   ctx.utils = {

@@ -14,7 +14,8 @@ function warn(ctx) {
   return function (type, ...rest) {
     if (type) {
       let log = ''
-      const msg = ctx.const.messages.get(type)
+      const lang = ctx.config.lang
+      const msg = lang === 'en' ? require('./install/const').messages_en.get(type) : ctx.const.messages.get(type)
       let color = 'red'
       if (ctx.utils.checkType(msg) === 'F') {
         log = msg(...rest)

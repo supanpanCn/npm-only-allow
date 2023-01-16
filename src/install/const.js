@@ -37,6 +37,19 @@ const messages = new Map([
   ['NO_PKG','package.json文件不存在']
 ])
 
+const messages_en = new Map([
+  ['NO_PM_PROVIDER',`Please specify the wanted package manager: ${PMs.join('、')}`],
+  ['NONLICET_PM',(extra)=>`${extra && extra} not a valid package manager. the alternative: ${PMs.join('、')}`],
+  ['MIS_MATCH',(current,setted)=>`The current used ${current ? '('+current+')' : ''} package manager is inconsistent with the set ${setted ? '('+setted+')' : ''}`],
+  ['EXIT','If npminstall-debug.log exists , delete it and try again'],
+  ['UN_INSTALLED',(PM)=>`'node_modules' is not present，install with ${orders.get(PM) || 'npm i'}`],
+  ['UN_MATCHED_INSTALL',(puts)=>`Detected that you may have installed a dependency ${puts.length?'（'+ puts.join('、')+')':''} using a mismatched package manager ,please uninstall ant try again`],
+  ['GUIDE','This may be due to the presence of multiple lock files locally, if you think the detection is inaccurate, you can remove the lock file to try to skip'],
+  ['GUIDE_NO_LOCK','You may have deleted the lock file by mistake. Please regenerate it'],
+  ['GUIDE_MIS_MATCH_PNPM',`If '.pnpm-debug.log' exists , delete it and try again`],
+  ['NO_PKG',`The 'package.json' file does not exist`]
+])
+
 const useredPkgVestigital = {
   'pnpm-lock.yaml':'pnpm',
   'yarn.lock':'yarn',
@@ -47,15 +60,16 @@ const useredPkgVestigital = {
   'cnpm':'npm-register-none-lock'
 } 
 
-
 const types = new Map([
   ['[object Object]','O',],
   ['[object Function]','F',],
   ['[object Number]','N',],
   ['[object String]','S',]
 ])
+
 module.exports = {
   messages,
+  messages_en,
   types,
   root,
   sep,

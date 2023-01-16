@@ -17,8 +17,11 @@ function parseArg() {
   } = ctx.fs;
   const {
     PM,
-    server = "install"
+    server = "install",
+    lang = 'zh'
   } = minimist(process.argv.slice(2));
+  
+  ctx.config.lang = lang
   ctx.config._npm_postintall_throw_err = false
   let currentPM = PM;
   if (server === "install") {
@@ -33,6 +36,8 @@ function parseArg() {
   }
   ctx.config.PM = currentPM;
   ctx.config.server = server;
+  
+  
   const config_path = resolves.get("config_path")
   if(exists(config_path)){
     const config = readJson(config_path);
