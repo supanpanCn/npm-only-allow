@@ -1,4 +1,5 @@
-function guessPM(ctx) {
+function guessPM(noGuide) {
+  const ctx = this.getContext();
   const { exists, readFile ,readJson } = ctx.fs;
   const { resolves, PMs } = ctx.const;
   const { PM } = ctx.config;
@@ -16,7 +17,10 @@ function guessPM(ctx) {
   }
   // cnpm或正常情况下为[]
   gus = gus.filter(v=>v!==PM)
-  if(gus.length) return gus
+  if(gus.length){
+    !noGuide && log('GUIDE','yellow')
+    return gus
+  }
   if(PM !== 'cnpm'){
     const lock_path = resolves.get('lock_path')(PM)
     if(!exists(lock_path)){
@@ -40,7 +44,8 @@ function guessPM(ctx) {
     }
 
   }
-  return ['cnpm']
+
+  return []
 }
 module.exports = {
   guessPM,

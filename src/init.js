@@ -14,7 +14,7 @@ const {
   readFileSync
 } = require('fs')
 const whichPMRuns = require("which-pm-runs");
-const { warn, getType, merge, diffPkg , patch } = require("./utils");
+const { warn, getType, merge, diffPkg , patch ,copyPkg } = require("./utils");
 const {
   PMs,
   root,
@@ -32,6 +32,9 @@ const {
   parseInstalledModule,
   parsePkgExist
 } = require("./install/parse");
+const {
+  guessPM
+} = require('./start/guess')
 
 function processContext(ctx) {
   const checkType = ctx.utils.checkType;
@@ -74,6 +77,7 @@ function createContext() {
     parseLegality,
     parseUserPassedArgv,
     parseInstalledModule,
+    parsePM:guessPM
   };
   ctx.const = {
     PMs,
@@ -92,6 +96,7 @@ function createContext() {
     exists:existsSync,
     unlink:unlinkSync,
     readFile:readFileSync,
+    copyPkg:copyPkg(ctx),
     diff:function(a,b){
       if(getType(a) === 'O' && getType(b) === 'O'){
         a = JSON.stringify(a)

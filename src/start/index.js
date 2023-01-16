@@ -4,10 +4,16 @@ function start(ctx) {
     log,
     exit
   } = ctx.utils
-  const gus = require('./guess').guessPM(ctx)
-  if(gus.length === 0) return
+  const {
+    copyPkg
+  } = ctx.fs
   const puts = diffPkg()
   if(puts.length){
+    const gus = ctx.parse.parsePM()
+    if(gus.length === 0){
+      copyPkg()
+      return
+    }
     log('UN_MATCHED_INSTALL',puts)
     exit()
   }

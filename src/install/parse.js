@@ -69,7 +69,16 @@ function parseLegality() {
   if (npm.name === PM) return;
   log("MIS_MATCH", npm.name, PM);
   const installed =  patch()
-  !installed && ctx.npm.uninstall('node_modules_path');
+  if(installed){
+    const gus = ctx.parse.parsePM(true)
+    if(gus.length){
+      ctx.npm.uninstall('node_modules_path');
+    }
+  }
+  
+  if(npm.name === 'pnpm'){
+    log('GUIDE_MIS_MATCH_PNPM','yellow')
+  }
   setTimeout(() => {
     exit();
   }, 500);

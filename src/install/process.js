@@ -5,7 +5,6 @@ function onProcessCallback(ctx) {
       PM,
       _npm_postintall_throw_err
     } = ctx.config || {};
-    if (server !== "install") return;
     const {
       resolves,
       root,
@@ -13,19 +12,21 @@ function onProcessCallback(ctx) {
       useredPkgVestigital
     } = ctx.const
     const {
-      copy,
       exists,
       unlink,
-      writeJson
+      writeJson,
+      copyPkg
     } = ctx.fs
     const npminstall_err_path = resolves.get("npminstall_err_path");
+    
     if (
       _npm_postintall_throw_err &&
-      exists(npminstall_err_path)
+      exists(npminstall_err_path) &&
+      server === "install"
     ) {
       ctx.utils.log("EXIT");
-      return;
     }
+    
     // remove
     const dynamic_path = resolves.get("dynamic_path");
     const removes = Object.keys(useredPkgVestigital)
@@ -38,8 +39,7 @@ function onProcessCallback(ctx) {
     });
 
     // cache
-    const pkg_path = resolves.get("pkg_path");
-    exists(pkg_path) && copy(pkg_path, resolves.get("copy_path"));
+    copyPkg()
     writeJson(resolves.get("config_path"), ctx.config, {
       spaces: '\t'
     });

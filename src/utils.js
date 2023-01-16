@@ -97,6 +97,7 @@ function diffPkg(ctx) {
   }
 }
 
+// yarn补丁
 function patch(ctx) {
   return function () {
     const {
@@ -121,7 +122,6 @@ function patch(ctx) {
       resolves
     } = ctx.const
     const installed = parseInstalledModule.call(ctx.parse,true)
-    // yarn add pkg
     if (server === 'install') {
       if (npm.name === 'yarn') {
         if (installed) {
@@ -152,10 +152,25 @@ function patch(ctx) {
   }
 }
 
+function copyPkg(ctx){
+  return function(){
+    const {
+      copy,
+      exists
+    } = ctx.fs
+    const {
+      resolves
+    } = ctx.const
+    const pkg_path = resolves.get("pkg_path");
+    exists(pkg_path) && copy(pkg_path, resolves.get("copy_path"));
+  }
+}
+
 module.exports = {
   warn,
   getType,
   merge,
   diffPkg,
-  patch
+  patch,
+  copyPkg
 }

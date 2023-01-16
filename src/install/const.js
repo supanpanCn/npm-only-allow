@@ -33,6 +33,7 @@ const messages = new Map([
   ['UN_MATCHED_INSTALL',(puts)=>`检测到您可能使用了不匹配的包管理器安装了依赖${puts.length?'（'+ puts.join('、')+')':''},请卸载后重试`],
   ['GUIDE','这可能是由于您本地存在多个lock文件，如果您认为该检测是不准确的，您可以删除lock文件尝试跳过'],
   ['GUIDE_NO_LOCK','您可能错误的删除了lock文件，请重新生成'],
+  ['GUIDE_MIS_MATCH_PNPM','请删除（如果有）.pnpm-debug.log文件后重试'],
   ['NO_PKG','package.json文件不存在']
 ])
 
