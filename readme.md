@@ -5,22 +5,20 @@
 
 > The npm-postinstall goal is to fix them. 
 # Installation
+```js
+  yarn add npm-postinstall
+```
+# usage
+
 Add a `postinstall` script to your project's `package.json`.  
 
 If you want to force `npm|cnpm|pnpm|yarn`, add:  
+(If you want to smooth out the difference, you also need to add it in the startup script)
 
 ```json
 {
   "scripts": {
-    "postinstall": "npm-postinstall --PM yarn --server install"
-  }
-}
-```
-
-If you want to smooth out the difference, you also need to add it in the startup script
-```json
-{
-  "scripts": {
+    "postinstall": "npm-postinstall --PM yarn --server install",
     "start": "npm-postinstall --server start && vite server or other"
   }
 }
