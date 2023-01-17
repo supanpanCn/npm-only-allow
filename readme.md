@@ -8,7 +8,7 @@
 ```js
   yarn add npm-only-allow
 ```
-# usage
+# Usage
 
 Add a `postinstall` script to your project's `package.json`.  
 
