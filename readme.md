@@ -6,7 +6,7 @@
 > The `npm-only-allow `goal is to fix them. 
 # Installation
 ```js
-  yarn add `npm-only-allow`
+  yarn add npm-only-allow
 ```
 # usage
 
