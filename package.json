@@ -1,12 +1,12 @@
 {
   "name": "npm-only-allow",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Specification package manager",
   "main": "index.js",
   "bin": "index.js",
   "files": [
     "index.js",
-    "src"
+    "src/"
   ],
   "scripts": {},
   "keywords": [

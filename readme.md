@@ -18,8 +18,8 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 ```json
 {
   "scripts": {
-    "postinstall": "npm-only-allow --PM yarn --server install",
-    "start": "npm-only-allow --server start && vite server or other"
+    "postinstall": "npx npm-only-allow --PM yarn --server install",
+    "start": "npx npm-only-allow --server start && vite server or other"
   }
 }
 ```
