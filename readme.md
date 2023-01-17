@@ -1,12 +1,12 @@
 # npm-only-allow
-> The hook about preinstall of npm behaves inconsistently across package managers. 
+> The hook about preinstall of `npm` behaves inconsistently across package managers. 
 
-> The existing solution (only-allow) is not working well.  
+> The existing solution (`only-allow`) is not working well.  
 
-> The npm-only-allow goal is to fix them. 
+> The `npm-only-allow `goal is to fix them. 
 # Installation
 ```js
-  yarn add npm-only-allow
+  yarn add `npm-only-allow`
 ```
 # usage
 
