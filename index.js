@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 async function run() {
   try {
+
     // create contenxt
     const ctx = require("./src/init")();
 
@@ -10,14 +11,20 @@ async function run() {
       log("NO_PKG");
       exit();
     }
-
-    // which script running
-    const script = process.env.npm_lifecycle_event;
-    const pre = script === "preinstall" || script === undefined;
-    const server = pre ? "install" : "start";
+    
     // analysis argv
     ctx.analysis.analyseArgv(ctx);
 
+    // whether PM is exist
+    if(!ctx.config.PM){
+      log("NO_PM_PROVIDER");
+      exit();
+    }
+
+    // which script running
+    const script = process.env.npm_lifecycle_script;
+    const server = script.includes(ctx.config.PM) ? "install" : "start";
+    
     // do : start or install
     if (server === "install") {
       require("./src/install")(ctx);
