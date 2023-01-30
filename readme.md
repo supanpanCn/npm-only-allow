@@ -4,10 +4,7 @@
 > The existing solution (`only-allow`) is not working well.  
 
 > The `npm-only-allow `goal is to fix them. 
-# Installation
-```js
-  yarn add npm-only-allow
-```
+
 # Usage
 
 Add a `postinstall` script to your project's `package.json`.  
@@ -18,8 +15,8 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 ```json
 {
   "scripts": {
-    "postinstall": "npx npm-only-allow --PM yarn --server install",
-    "start": "npx npm-only-allow --server start && vite server or other"
+    "postinstall": "npx npm-only-allow --PM yarn",
+    "start": "npx npm-only-allow && vite"
   }
 }
 ```
@@ -27,10 +24,8 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 # params
 * PM
   > Set the package manager
-* server
-  > Specifies whether to run in the 'postinstall' or 'start' phase
-* lang
-  > Set the language category for error messages to be output , Default to Chinese
+* lang （en or zh）
+  > Set the language category for error messages to be output , Default to English
 
 # Sample environment
 `node v14.19.0`  
@@ -44,38 +39,72 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 
 > You just have to choose one or the other
 
-Let's take `cnpm` for example
+Let's take `yarn` for example
 
 ```json
 {
   "scripts": {
-    "postinstall": "npm-only-allow --PM cnpm --server install",
+    "postinstall": "npm-only-allow --PM yarn --server install",
     "start": "npm-only-allow --server start"
   }
 }
 ```
 * step 1  
-  `pnpm` i | `yarn` add | `npm` i  
+```js
+  /**
+   *  pnpm i | cnpm i | npm i 
+   *  => [npm-only-allow]:当前运行的(pnpm)包管理器与设置的(yarn)不一致
+   */
+```
 * step 2  
-  `cnpm` i
+```js
+  /**
+   *  yarn
+   *  => success
+   */
+```
 * step 3  
-  `cnpm` i lodash
+```js
+  /**
+   *  cnpm i lodash | pnpm i lodash | cnpm i lodash
+   *  => success
+   */
+```
 * step 4  
-  `cnpm` start
+```js
+  /**
+   *  yarn start
+   *  => [npm-only-allow]:检测到您可能使用了不匹配的包管理器安装了依赖（lodash),请卸载或使用正确的管理器安装后重试
+   */
+```
 * step 5  
-  `yarn` add moment
+```js
+  /**
+   *  yarn add lodash
+   *  => success
+   */
+```
 * step 6  
-  `cnpm` start
+```js
+  /**
+   *  cnpm start
+   *  => success
+   */
+```
 * step 7  
-  `pnpm` i jquery
+```js
+  /**
+   *  yarn add moment
+   *  => success
+   */
+```
 * step 8  
-  `cnpm` start
-* step 9  
-  `pnpm` uninstall jquery  
-  or  
-  remove lock
-* step 10  
-  `cnpm` start
-
+```js
+  /**
+   *  cnpm i jquery | pnpm i jquery | cnpm i jquery
+   *  => 关闭正在运行的线程
+   *  => [npm-only-allow]:检测到您可能使用了不匹配的包管理器安装了依赖（jquery),请卸载或使用正确的管理器安装后重试
+   */
+```
 # License
 [MIT](LICENSE)

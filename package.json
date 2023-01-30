@@ -1,6 +1,6 @@
 {
   "name": "npm-only-allow",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "Specification package manager",
   "main": "index.js",
   "bin": "index.js",
@@ -23,6 +23,8 @@
   "license": "MIT",
   "homepage": "https://github.com/supanpanCn/npm-fasly-postinstall",
   "dependencies": {
+    "chokidar": "^3.5.3",
+    "concurrently": "^7.6.0",
     "fs-extra": "^11.1.0",
     "minimist": "^1.2.7",
     "picocolors": "^1.0.0",
