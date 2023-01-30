@@ -21,7 +21,7 @@
   ],
   "author": "1372978934@qq.com",
   "license": "MIT",
-  "homepage": "https://github.com/supanpanCn/npm-fasly-postinstall",
+  "homepage": "https://github.com/supanpanCn/npm-only-allow",
   "dependencies": {
     "chokidar": "^3.5.3",
     "concurrently": "^7.6.0",
