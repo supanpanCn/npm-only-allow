@@ -15,7 +15,8 @@ function onProcessCallback(ctx) {
       exists,
       unlink,
       writeJson,
-      copyPkg
+      copyPkg,
+      copyLock
     } = ctx.fs
     const npminstall_err_path = resolves.get("npminstall_err_path");
     
@@ -26,6 +27,8 @@ function onProcessCallback(ctx) {
     ) {
       ctx.utils.log("EXIT");
     }
+
+    if(_npm_postintall_throw_err) return
     
     // remove
     const dynamic_path = resolves.get("dynamic_path");
@@ -38,8 +41,12 @@ function onProcessCallback(ctx) {
       exists(v) && unlink(v);
     });
 
+    if(server !== 'install') return
+
     // cache
     copyPkg()
+    copyLock()
+
     writeJson(resolves.get("config_path"), ctx.config, {
       spaces: '\t'
     });

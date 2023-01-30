@@ -5,102 +5,75 @@ const {
   writeJsonSync,
   readJsonSync,
 } = require("fs-extra");
-const {
-  existsSync,
-  unlinkSync,
-  readFileSync
-} = require('fs')
+const { existsSync, unlinkSync, readFileSync } = require("fs");
 const whichPMRuns = require("which-pm-runs");
-const { warn, getType, merge, diffPkg , patch ,copyPkg } = require("./utils");
-const {
-  PMs,
-  root,
-  types,
-  messages,
-  resolves,
-  useredPkgVestigital,
-  sep,
-} = require("./install/const");
-const { uninstall } = require("./install/uninstall");
-const {
-  parseExecPM,
-  parseLegality,
-  parseUserPassedArgv,
-  parseInstalledModule,
-  parsePkgExist
-} = require("./install/parse");
-const {
-  guessPM
-} = require('./start/guess')
+const chokidar = require("chokidar");
+const funcs = require("./shared/function");
+const consts = require("./shared/const");
+const patchs = require("./shared/patch");
+const analysis = require("./shared/analysis")
 
-function processContext(ctx) {
-  const checkType = ctx.utils.checkType;
-  for (let key in ctx) {
-    if (checkType(ctx[key]) === "O") {
-      ctx[key].getContext = function () {
-        return ctx;
-      };
+function processContext(ctx,obj,arr){
+  const ls = Array.isArray(arr) ? arr : Object.keys(obj)
+  for(let i = 0 ; i<ls.length;i++){
+    const v = ls[i]
+    if(typeof obj[v] === 'function'){
+      obj[v] = obj[v](ctx)
     }
   }
-  require("./install/process").onProcessCallback(ctx);
-  return ctx;
 }
+
 function createContext() {
   const ctx = {};
-  const log = warn(ctx);
-  const checkType = getType(ctx);
+
   ctx.config = {
     PM: "",
     server: "",
     npm: {},
-    lang:'zh',
+    lang: "zh",
+    correctTimes:0,
+    userScript:[],
     _npm_postintall_throw_err: false,
   };
+
+  ctx.const = consts;
+  ctx.analysis = analysis
+  ctx.patch = patchs
+  
+  processContext(ctx,ctx.patch)
+
   ctx.utils = {
+    ...funcs,
+    minimist,
+    chokidar,
+    whichPMRuns,
     exit: function () {
       ctx.config._npm_postintall_throw_err = true;
       process.exit(1);
-    },
-    merge,
-    log,
-    checkType,
-    minimist,
-    whichPMRuns,
-    diffPkg:diffPkg(ctx),
-    patch:patch(ctx)
+    }
   };
-  ctx.parse = {
-    parseExecPM,
-    parsePkgExist,
-    parseLegality,
-    parseUserPassedArgv,
-    parseInstalledModule,
-    parsePM:guessPM
-  };
-  ctx.const = {
-    PMs,
-    sep,
-    root,
-    types,
-    messages,
-    resolves,
-    useredPkgVestigital,
-  };
+
+  processContext(ctx,ctx.utils,['log','checkType','checkInstalledModule','diffPkg'])
+
   ctx.fs = {
     remove: removeSync,
     copy: copySync,
     writeJson: writeJsonSync,
     readJson: readJsonSync,
-    exists:existsSync,
-    unlink:unlinkSync,
-    readFile:readFileSync,
-    copyPkg:copyPkg(ctx)
+    exists: existsSync,
+    unlink: unlinkSync,
+    readFile: readFileSync,
+    copyPkg: funcs.copyPkg,
+    copyLock:funcs.copyLock
   };
+
+  processContext(ctx,ctx.fs,['copyPkg','copyLock'])
+
   ctx.npm = {
-    uninstall
+    uninstall:funcs.uninstall(ctx),
   };
-  return processContext(ctx);
+
+  require("./install/process").onProcessCallback(ctx);
+  return ctx;
 }
-module.exports = {
-  createContext,
-};
+module.exports = createContext;
