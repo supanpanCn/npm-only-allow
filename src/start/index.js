@@ -1,6 +1,6 @@
 module.exports = function (ctx, changing) {
   ctx.config.server = "start";
-  const { checkInstalledModule, diffPkg, log, exit, guessPM } = ctx.utils;
+  const { checkInstalledModule, diffPkg, log, exit } = ctx.utils;
   const { copyPkg, copyLock , exists, readFile } = ctx.fs;
   const { PM } = ctx.config;
   const { resolves } = ctx.const;

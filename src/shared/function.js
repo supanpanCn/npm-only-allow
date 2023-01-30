@@ -31,44 +31,6 @@ function warn(ctx) {
   };
 }
 
-function merge(a, b, isCover) {
-  const O = "[object Object]";
-  if (_getType(a) === O && _getType(b) === O) {
-    if (isCover) {
-      return {
-        ...a,
-        ...b,
-      };
-    }
-    const obj = {};
-    for (let key in a) {
-      if (b.hasOwnProperty(key)) {
-        if (b[key]) {
-          if (_getType(b[key]) === O) {
-            obj[key] = merge(a[key], b[key]);
-          } else {
-            obj[key] = b[key];
-          }
-          delete b[key];
-        } else {
-          obj[key] = a[key];
-        }
-      }
-    }
-    return {
-      ...a,
-      ...b,
-      ...obj,
-    };
-  }
-  if (_getType(a) === O && _getType(b) !== O) {
-    return {
-      ...a,
-      _merged: b,
-    };
-  }
-}
-
 function diffPut(olds, news) {
   const O = "[object Object]";
   const puts = [];
@@ -146,7 +108,6 @@ function checkInstalledModule(ctx) {
 module.exports = {
   log: warn,
   checkType: getType,
-  merge,
   diffPkg,
   copyPkg,
   copyLock,
