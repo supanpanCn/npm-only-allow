@@ -5,7 +5,7 @@ async function run() {
     const ctx = require("./src/init")();
     
     // check package.json
-    const { minimist, log, exit } = ctx.utils;
+    const { log, exit } = ctx.utils;
     if (!ctx.fs.exists(ctx.const.resolves.get("pkg_path"))) {
       log("NO_PKG");
       exit();
@@ -20,10 +20,7 @@ async function run() {
     ctx.analysis.analyseArgv(ctx)
 
     // do : start or install
-    const argvs = minimist(process.argv.slice(2));
-    const actualServer = argvs.server || server;
-
-    if (actualServer === "install") {
+    if (server === "install") {
       require("./src/install")(ctx);
     } else {
       require("./src/start")(ctx);
