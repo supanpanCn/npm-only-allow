@@ -3,7 +3,7 @@ async function run() {
   try {
     // create contenxt
     const ctx = require("./src/init")();
-    
+
     // check package.json
     const { log, exit } = ctx.utils;
     if (!ctx.fs.exists(ctx.const.resolves.get("pkg_path"))) {
@@ -13,11 +13,10 @@ async function run() {
 
     // which script running
     const script = process.env.npm_lifecycle_event;
-    const server =
-      script === "preinstall" || script === undefined ? "install" : "start";
-
+    const pre = script === "preinstall" || script === undefined;
+    const server = pre ? "install" : "start";
     // analysis argv
-    ctx.analysis.analyseArgv(ctx)
+    ctx.analysis.analyseArgv(ctx);
 
     // do : start or install
     if (server === "install") {
