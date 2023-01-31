@@ -21,7 +21,8 @@ const resolves = new Map([
   ['cache_path',path.resolve(root,'.npm-only-allow')],
   ['config_path',path.resolve(__filename,'../../../cache/config.json')],
   ['dynamic_path',(filePath)=>path.resolve(filePath)],
-  ['pnpm_err_path',path.resolve(root,'.pnpm-debug.log')]
+  ['pnpm_err_path',path.resolve(root,'.pnpm-debug.log')],
+  ['ignore_path',path.resolve(root,'.gitignore')],
 ])
 
 const messages = new Map([

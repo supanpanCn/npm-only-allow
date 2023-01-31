@@ -5,7 +5,7 @@ const {
   writeJsonSync,
   readJsonSync,
 } = require("fs-extra");
-const { existsSync, unlinkSync, readFileSync } = require("fs");
+const { existsSync, unlinkSync, readFileSync , appendFileSync } = require("fs");
 const whichPMRuns = require("which-pm-runs");
 const chokidar = require("chokidar");
 const funcs = require("./shared/function");
@@ -60,6 +60,7 @@ function createContext() {
     writeJson: writeJsonSync,
     readJson: readJsonSync,
     exists: existsSync,
+    appendFile:appendFileSync,
     unlink: unlinkSync,
     readFile: readFileSync,
     setCache:funcs.setCache

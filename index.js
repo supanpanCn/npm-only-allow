@@ -20,6 +20,10 @@ async function run() {
       exit();
     }
 
+    // set ignore
+    const ignore_path = ctx.const.resolves.get('ignore_path')
+    ctx.fs.appendFile(ignore_path,`\r\n/.npm-only-allow`)
+
     // which script running
     const script = process.env.npm_lifecycle_script;
     const server = script.includes(ctx.config.PM) ? "install" : "start";
