@@ -22,10 +22,6 @@ module.exports = function (ctx) {
   }
 
   // whether PM is legal
-  if (!PM) {
-    log("NO_PM_PROVIDER");
-    exit();
-  }
   if (!PMs.includes(PM)) {
     log("NONLICET_PM", PM);
     exit();

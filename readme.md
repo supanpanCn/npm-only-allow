@@ -5,7 +5,7 @@
 
 > The `npm-only-allow `goal is to fix them. 
 
-# Usage
+# usage
 
 Add a `postinstall` script to your project's `package.json`.  
 
@@ -15,8 +15,8 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 ```json
 {
   "scripts": {
-    "postinstall": "npx npm-only-allow --PM yarn",
-    "start": "npx npm-only-allow && vite"
+    "postinstall": "npx npm-only-allow@latest --PM yarn",
+    "start": "npx npm-only-allow@latest && vite"
   }
 }
 ```
@@ -34,6 +34,9 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 `pnpm v7.2.7`  
 `cnpm v9.0.1`
 
+# tips
+If you are using 'cnpm' as your package manager, try pressing the space bar if loading is going on
+
 # Testing process
 > This is the testing process after the development is complete
 
@@ -44,8 +47,8 @@ Let's take `yarn` for example
 ```json
 {
   "scripts": {
-    "postinstall": "npm-only-allow --PM yarn --server install",
-    "start": "npm-only-allow --server start"
+    "postinstall": "npx npm-only-allow@latest --PM yarn",
+    "start": "npx npm-only-allow@latest && vite"
   }
 }
 ```
