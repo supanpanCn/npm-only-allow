@@ -5,7 +5,7 @@ const {
   writeJsonSync,
   readJsonSync,
 } = require("fs-extra");
-const { existsSync, unlinkSync, readFileSync } = require("fs");
+const { existsSync, unlinkSync, readFileSync , appendFileSync } = require("fs");
 const whichPMRuns = require("which-pm-runs");
 const chokidar = require("chokidar");
 const funcs = require("./shared/function");
@@ -31,7 +31,6 @@ function createContext() {
     server: "",
     npm: {},
     lang: "zh",
-    correctTimes:0,
     userScript:[],
     _npm_postintall_throw_err: false,
   };
@@ -61,13 +60,13 @@ function createContext() {
     writeJson: writeJsonSync,
     readJson: readJsonSync,
     exists: existsSync,
+    appendFile:appendFileSync,
     unlink: unlinkSync,
     readFile: readFileSync,
-    copyPkg: funcs.copyPkg,
-    copyLock:funcs.copyLock
+    setCache:funcs.setCache
   };
 
-  processContext(ctx,ctx.fs,['copyPkg','copyLock'])
+  processContext(ctx,ctx.fs,['setCache'])
 
   ctx.npm = {
     uninstall:funcs.uninstall(ctx),

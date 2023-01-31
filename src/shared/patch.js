@@ -12,7 +12,8 @@ function yarn(ctx) {
           const puts = diffPkg();
           log("UN_MATCHED_INSTALL", puts);
           const pkg_path = resolves.get("pkg_path");
-          const copy_pkg_path = resolves.get("copy_path");
+          const prefix = resolves.get('cache_path')
+          const copy_pkg_path = ctx.utils.resolve(prefix,'pkg.json');
           if (exists(copy_pkg_path) && exists(pkg_path)) {
             const o = readJson(copy_pkg_path);
             const l = readJson(pkg_path);

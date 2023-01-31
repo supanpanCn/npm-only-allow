@@ -1,7 +1,7 @@
 module.exports = function (ctx, changing) {
   ctx.config.server = "start";
   const { checkInstalledModule, diffPkg, log, exit } = ctx.utils;
-  const { copyPkg, copyLock , exists, readFile } = ctx.fs;
+  const { setCache , exists, readFile } = ctx.fs;
   const { PM } = ctx.config;
   const { resolves } = ctx.const;
   const { cnpm } = ctx.patch;
@@ -21,8 +21,7 @@ module.exports = function (ctx, changing) {
     }
 
     if (misDep === 0) {
-      copyPkg();
-      copyLock();
+      setCache()
       return
     }
 
@@ -30,6 +29,7 @@ module.exports = function (ctx, changing) {
     exit();
   }
   if (changing) return;
+  setCache()
   require("./watch")(ctx);
   require("./userProcess")(ctx);
 };

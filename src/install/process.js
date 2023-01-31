@@ -14,9 +14,7 @@ function onProcessCallback(ctx) {
     const {
       exists,
       unlink,
-      writeJson,
-      copyPkg,
-      copyLock
+      setCache
     } = ctx.fs
     const npminstall_err_path = resolves.get("npminstall_err_path");
     
@@ -44,12 +42,8 @@ function onProcessCallback(ctx) {
     if(server !== 'install') return
 
     // cache
-    copyPkg()
-    copyLock()
-
-    writeJson(resolves.get("config_path"), ctx.config, {
-      spaces: '\t'
-    });
+    setCache()
+    
   });
 }
 module.exports = {
