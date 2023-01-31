@@ -47,8 +47,8 @@ Let's take `yarn` for example
 ```json
 {
   "scripts": {
-    "postinstall": "npx npm-only-allow@latest --PM yarn --server install",
-    "start": "npx npm-only-allow@latest --server start"
+    "postinstall": "npx npm-only-allow@latest --PM yarn",
+    "start": "npx npm-only-allow@latest && vite"
   }
 }
 ```
