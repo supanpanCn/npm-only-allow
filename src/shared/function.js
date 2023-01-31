@@ -48,7 +48,8 @@ function diffPkg(ctx) {
   return function () {
     const { readJson, exists } = ctx.fs;
     const resolves = ctx.const.resolves;
-    const pre_pkg_path = resolves.get("copy_path");
+    const prefix = resolves.get('cache_path')
+    const pre_pkg_path = ctx.utils.resolve(prefix,'pkg.json');
     const pkg_path = resolves.get("pkg_path");
     if (exists(pre_pkg_path) && exists(pkg_path)) {
       const old = readJson(pre_pkg_path);
@@ -63,21 +64,19 @@ function diffPkg(ctx) {
   };
 }
 
-function copyPkg(ctx) {
+function setCache(ctx) {
   return function () {
-    const { exists,copy } = ctx.fs;
+    const { exists, copy ,writeJson } = ctx.fs;
     const { resolves } = ctx.const;
+    const { resolve } = ctx.utils
     const pkg_path = resolves.get("pkg_path");
-    exists(pkg_path) && copy(pkg_path, resolves.get("copy_path"));
-  };
-}
-
-function copyLock(ctx) {
-  return function () {
-    const { copy, exists } = ctx.fs;
-    const { resolves } = ctx.const;
     const lock_path = resolves.get("lock_path")(ctx.config.PM);
-    exists(lock_path) && copy(lock_path, resolves.get("copy_lock_path"));
+    const prefix = resolves.get('cache_path')
+    exists(pkg_path) && copy(pkg_path, resolve(prefix,'pkg.json'));
+    exists(lock_path) && copy(lock_path, resolve(prefix,'lock.json'));
+    writeJson(resolve(prefix,'config.json'), ctx.config, {
+      spaces: '\t'
+    });
   };
 }
 
@@ -109,8 +108,8 @@ module.exports = {
   log: warn,
   checkType: getType,
   diffPkg,
-  copyPkg,
-  copyLock,
   uninstall,
+  setCache,
   checkInstalledModule,
+  resolve:require('path').resolve
 };

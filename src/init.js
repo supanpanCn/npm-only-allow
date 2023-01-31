@@ -31,7 +31,6 @@ function createContext() {
     server: "",
     npm: {},
     lang: "zh",
-    correctTimes:0,
     userScript:[],
     _npm_postintall_throw_err: false,
   };
@@ -63,11 +62,10 @@ function createContext() {
     exists: existsSync,
     unlink: unlinkSync,
     readFile: readFileSync,
-    copyPkg: funcs.copyPkg,
-    copyLock:funcs.copyLock
+    setCache:funcs.setCache
   };
 
-  processContext(ctx,ctx.fs,['copyPkg','copyLock'])
+  processContext(ctx,ctx.fs,['setCache'])
 
   ctx.npm = {
     uninstall:funcs.uninstall(ctx),

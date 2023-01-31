@@ -18,9 +18,7 @@ const resolves = new Map([
   ['npminstall_err_path',path.resolve(root,'npminstall-debug.log')],
   ['lock_path',(PM)=>path.resolve(root,useredPkgVestigital[PM])],
   ['pkg_path',path.resolve(root,'package.json')],
-  ['copy_path',path.resolve(__filename,'../../../cache/pkg.json')],
-  ['copy_lock_path',path.resolve(__filename,'../../../cache/lock.json')],
-  ['cache_path',path.resolve(__filename,'../../../cache')],
+  ['cache_path',path.resolve(root,'.npm-only-allow')],
   ['config_path',path.resolve(__filename,'../../../cache/config.json')],
   ['dynamic_path',(filePath)=>path.resolve(filePath)],
   ['pnpm_err_path',path.resolve(root,'.pnpm-debug.log')]

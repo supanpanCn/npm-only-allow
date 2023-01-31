@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 async function run() {
   try {
-
     // create contenxt
     const ctx = require("./src/init")();
 
@@ -24,7 +23,7 @@ async function run() {
     // which script running
     const script = process.env.npm_lifecycle_script;
     const server = script.includes(ctx.config.PM) ? "install" : "start";
-    
+
     // do : start or install
     if (server === "install") {
       require("./src/install")(ctx);

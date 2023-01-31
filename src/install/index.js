@@ -1,25 +1,22 @@
 module.exports = function (ctx) {
   const { PMs, resolves } = ctx.const;
   const { readJson, exists } = ctx.fs;
-  const { log, exit } = ctx.utils;
+  const { log, exit,resolve } = ctx.utils;
   const { yarn } = ctx.patch;
   const { npm,PM } = ctx.config
-  let correctTimes = 0
 
   ctx.config.server = "install";
 
   // clear cache when user switched PM
-  const config_path = resolves.get("config_path");
+  const prefix = resolves.get('cache_path')
+
+  const config_path = resolve(prefix,'config.json');
   if (exists(config_path)) {
     const config = readJson(config_path);
-    correctTimes = config.correctTimes
     if (config.PM !== PM) ctx.npm.uninstall("cache_path");
   }
 
-  if (npm.name === PM){
-    ctx.config.correctTimes = correctTimes + 1
-    return
-  }
+  if (npm.name === PM) return
 
   // whether PM is legal
   if (!PMs.includes(PM)) {
