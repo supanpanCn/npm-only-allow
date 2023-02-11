@@ -27,18 +27,18 @@ function analyseArgv(ctx) {
     ctx.config.npm = whichPMRuns()
 
     delete t.preinstall
-
-    if(Object.keys(t).length > 1){
+    const restLen = Object.keys(t).length
+    if(restLen > 1){
       log("MORE_USED");
       exit();
     }
 
+    if(restLen === 0) return
+
     const star = t[Object.keys(t)[0]]
     const starArgv = star.split('&&')
     const userScript = starArgv.filter(v=>!v.includes(npmName)).map(v=>v.trim())
-    
     ctx.config.userScript = userScript
-
   }
 }
 

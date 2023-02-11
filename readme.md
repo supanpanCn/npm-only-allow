@@ -5,7 +5,7 @@
 
 > The `npm-only-allow `goal is to fix them. 
 
-# usage
+# Usage
 
 Add a `postinstall` script to your project's `package.json`.  
 
@@ -21,7 +21,7 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 }
 ```
 
-# params
+# Params
 * PM
   > Set the package manager
 * lang （en or zh）
@@ -34,7 +34,7 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 `pnpm v7.2.7`  
 `cnpm v9.0.1`
 
-# tips
+# Tips
 If you are using 'cnpm' as your package manager, try pressing the space bar if loading is going on
 
 # Testing process
@@ -104,7 +104,7 @@ Let's take `yarn` for example
 * step 8  
 ```js
   /**
-   *  cnpm i jquery | pnpm i jquery | cnpm i jquery
+   *  cnpm i jquery | pnpm i jquery | npm i jquery
    *  => 关闭正在运行的线程
    *  => [npm-only-allow]:检测到您可能使用了不匹配的包管理器安装了依赖（jquery),请卸载或使用正确的管理器安装后重试
    */
