@@ -3,6 +3,12 @@ async function run() {
   try {
     // create contenxt
     const ctx = require("./src/init")();
+    
+    // whether to run as an npm package
+    const cwd = process.cwd() || ''
+    if(cwd.includes('node_modules')){
+      return
+    }
 
     // check package.json
     const { log, exit } = ctx.utils;
@@ -25,8 +31,8 @@ async function run() {
     ctx.fs.appendFile(ignore_path,`\r\n/.npm-only-allow`)
 
     // which script running
-    const script = process.env.npm_lifecycle_script;
-    const server = script.includes(ctx.config.PM) ? "install" : "start";
+    const script = process.argv;
+    const server = script.includes('--PM') ? "install" : "start";
 
     // do : start or install
     if (server === "install") {

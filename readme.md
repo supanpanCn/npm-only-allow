@@ -7,7 +7,7 @@
 
 # Usage
 
-Add a `postinstall` script to your project's `package.json`.  
+Add a `preinstall` script to your project's `package.json`.  
 
 If you want to force `npm|cnpm|pnpm|yarn`, add:  
 (If you want to smooth out the difference, you also need to add it in the startup script)
@@ -15,7 +15,7 @@ If you want to force `npm|cnpm|pnpm|yarn`, add:
 ```json
 {
   "scripts": {
-    "postinstall": "npx npm-only-allow@latest --PM yarn",
+    "preinstall": "npx npm-only-allow@latest --PM yarn",
     "start": "npx npm-only-allow@latest && vite"
   }
 }
@@ -47,7 +47,7 @@ Let's take `yarn` for example
 ```json
 {
   "scripts": {
-    "postinstall": "npx npm-only-allow@latest --PM yarn",
+    "preinstall": "npx npm-only-allow@latest --PM yarn",
     "start": "npx npm-only-allow@latest && vite"
   }
 }

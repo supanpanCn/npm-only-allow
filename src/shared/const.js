@@ -37,7 +37,7 @@ const messages = new Map([
   ['GUIDE_MIS_MATCH_PNPM','请删除（如果有）.pnpm-debug.log文件后重试'],
   ['NO_PKG','package.json文件不存在'],
   ['NO_PRE_HOOK','未定义preinstall'],
-  ['MORE_USED','您应当仅在开始(如：start)和preinstall中使用该脚本'],
+  ['MORE_USED','您应当仅在开始(如：start)和preinstall中使用该脚本']
 ])
 
 const messages_en = new Map([
