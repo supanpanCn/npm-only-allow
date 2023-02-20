@@ -28,7 +28,14 @@ async function run() {
 
     // set ignore
     const ignore_path = ctx.const.resolves.get('ignore_path')
-    ctx.fs.appendFile(ignore_path,`\r\n/.npm-only-allow`)
+    let set = true
+    if(ctx.fs.exists(ignore_path)){
+      const code = ctx.fs.readFile(ignore_path,'utf-8')
+      if(code.includes('/.npm-only-allow')){
+        set = false
+      }
+    }
+    set && ctx.fs.appendFile(ignore_path,`\r\n/.npm-only-allow`)
 
     // which script running
     const script = process.argv;
